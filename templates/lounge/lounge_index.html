@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Solicitudes de Salones</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        /* Centrar el botón y ajustar márgenes */
+        .center-btn {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .btn-space {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Listado de Solicitudes de Salones</h1>
+        
+        <!-- Botón Crear separado del título -->
+        <div class="mb-3 btn-space">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#salonModal">Crear Solicitud</button>
+        </div>
+
+        <table class="table table-striped mt-4" id="salonsTable">
+            <thead>
+                <tr>
+                    <th>Nombre cliente</th>
+                    <th>Identificación</th>
+                    <th>Telefono</th>
+                    <th>ciudad</th>
+                    <th>Fecha del Evento</th>
+                    <th>Cantidad Personas</th>
+                    <th>Motivo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in salon_requests %}
+                <tr>
+                    <td>{{ request.client.first_name }} {{ request.client.last_name }}</td>
+                    <td>{{ request.client.identification }}</td>
+                    <td>{{ request.client.phone }}</td>
+                    <td>{{ request.client.city }}</td>
+                    <td>{{ request.event_date }}</td>
+                    <td>{{ request.number_of_people }}</td>
+                    <td>{{ request.reason }}</td>
+                    <td>{{ request.status }}</td>
+                    <td>
+
+                        <a href="#" 
+                            class="btn btn-danger btn-sm deleteSalonBtn" 
+                            data-bs-toggle="modal" 
+                            data-id="{{ request.pk }}" 
+                            data-url="{% url 'lounge_delete' request.pk %}">
+                            Eliminar
+                        </a>
+
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No hay solicitudes registradas.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Botón centrado -->
+        <div class="center-btn">
+            <a href="{% url 'home' %}" class="btn btn-secondary">Volver al Inicio</a>
+        </div>
+    </div>
+
+    <!-- Modal para crear o actualizar solicitudes -->
+    {% include 'lounge/lounge_form_modal.html' %}
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,50 @@
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.db
+*.sqlite3
+__pycache__
+db.sqlite3
+
+# Django migrations
+*/migrations/*
+*/migrations/*.*
+
+# Static files
+/static/
+*.css
+*.js
+
+# Media files
+/media/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Pytest
+.cache/
+
+# Coverage reports
+*.cover
+*.coverage
+*.hypothesis/
+
+# Django secret key
+.secret_key
+
+# Sentry config
+sentry.conf.py
+
+# dotenv
+.env
