@@ -12,10 +12,7 @@ db.sqlite3
 */migrations/*
 */migrations/*.*
 
-# Static files
-/static/
-*.css
-*.js
+
 
 # Media files
 /media/
